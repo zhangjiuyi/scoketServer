@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>server</title>
+</head>
+
+<body>
+  <h1 id='ip'></h1>
+  <h1 id='port'></h1>
+  <script>
+    const {
+      ipcRenderer
+    } = window.require('electron')
+    ipcRenderer.send('asynchronous-message', 'ok')
+
+    ipcRenderer.on("asynchronous-reply", (event, arg) => {
+      var data = JSON.parse(arg)
+      document.querySelector("#ip").innerText = "Server: " + data.ip;
+      document.querySelector("#port").innerText = "Port: " + data.port;
+    });
+  </script>
+</body>
+
+</html>
