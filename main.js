@@ -13,8 +13,8 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 500,
-    height: 300,
+    width: 450,
+    height: 250,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true
@@ -41,6 +41,7 @@ function createWindow() {
 
 function createServer() {
   const PORT = 9090;
+
   getPort(PORT).then(port => {
     //通信
     ipcMain.on("asynchronous-message", (event, arg) => {
@@ -56,7 +57,7 @@ function createServer() {
     });
 
     //线程池
-    const arr = [];
+    let arr = [];
     //connection
     ws.on("connection", socket => {
       arr.push(socket);
